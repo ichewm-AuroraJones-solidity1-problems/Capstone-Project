@@ -2,20 +2,20 @@
 
 > 一个自再平衡流动性 Vault 项目。用户存入 WETH / USDC 两种 ERC-20 资产，Vault 铸造 ERC-20 份额，并根据 TWAP 和波动率信号，在 IDLE、Uniswap V2 和一个 Uniswap V3 fee tier 之间切换流动性仓位。
 >
-> 本项目定位为作品集级 DeFi 合约工程项目，重点展示 Vault 份额会计、AMM Adapter 架构、TWAP 风控、自动再平衡、安全边界和 Foundry 测试能力。
+> 本项目聚焦 Vault 份额会计、AMM Adapter 架构、TWAP 风控、自动再平衡、安全边界和 Foundry 测试体系。
 
 ## 项目范围
 
-本项目面向测试网部署与主网 fork 验证，目标是展示完整的 DeFi 合约工程能力；当前版本未经审计，不建议直接用于真实主网资金。
+本项目面向测试网部署与主网 fork 验证，目标是形成一套围绕双资产 Vault、AMM adapter、TWAP 风控和再平衡流程的可验证合约实现；当前版本未经审计，不建议直接用于真实主网资金。
 
-核心能力覆盖：
+核心范围包括：
 
 - ERC-20 Vault shares 会计。
 - 双资产 deposit / withdraw 流程。
 - Venue Adapter Pattern。
 - Uniswap V2 流动性添加和移除。
 - 一个 Uniswap V3 fee tier 的 position 管理。
-- TWAP Oracle 读取和波动率计算。
+- Uniswap V3 TWAP Oracle 读取和波动率计算。
 - 基于波动率的 rebalance 决策。
 - Slippage protection、reentrancy protection、access control、emergency controls。
 - Foundry 单元测试和 Fork 测试。
@@ -36,7 +36,7 @@
 - 必做的 gas benchmark 优化报告。
 - 支持 fee-on-transfer、rebasing、ERC777 或非标准 ERC-20 token。
 
-这些内容可以作为 future work 或 bonus，但不应该阻塞当前核心版本的交付。
+这些内容可以作为后续扩展，但不应该阻塞当前核心版本的交付。
 
 ## 合约架构
 
@@ -388,7 +388,7 @@ valueAfter >= valueBefore * (10_000 - maxSlippageBps) / 10_000
 
 ### Fork 测试
 
-`Fork.t.sol` 应使用固定 fork block，并证明项目可以和真实 Uniswap 合约交互。
+`Fork.t.sol` 应使用固定 fork block，验证合约与真实 Uniswap 合约的交互路径。
 
 必要 fork 检查：
 
@@ -413,7 +413,7 @@ valueAfter >= valueBefore * (10_000 - maxSlippageBps) / 10_000
 
 ## 部署
 
-项目交付应包含 Sepolia 部署和验证说明。
+部署部分应包含 Sepolia 部署和验证说明。
 
 ### 环境变量
 
@@ -447,7 +447,7 @@ ETHERSCAN_API_KEY=
 
 ## 评分项对齐
 
-| 类别 | 权重 | 项目需要展示什么 |
+| 类别 | 权重 | 验收重点 |
 |---|---:|---|
 | Core Functionality | 35% | Deposit、withdraw、rebalance 正确工作 |
 | TWAP Integration | 25% | Oracle 读取可用，volatility 计算合理 |
@@ -470,6 +470,7 @@ ETHERSCAN_API_KEY=
 
 - 多 V3 position 策略。
 - 多 V3 fee tier。
+- V3 liquidity adapter 和 NFT position 管理。
 - Rebalancer incentives。
 - Governance-controlled parameters。
 - Invariant tests。
