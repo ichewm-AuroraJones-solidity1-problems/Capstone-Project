@@ -290,8 +290,7 @@ Oracle 读取 Uniswap V3 TWAP 数据，并提供 Vault rebalance 所需的 volat
 
 | Volatility | 信号 | 推荐 Venue |
 |---:|---|---|
-| `< 50 bps` | 非常稳定 | V3 |
-| `50-150 bps` | 正常 | V3 |
+| `< 150 bps` | 稳定或正常 | V3 |
 | `150-300 bps` | 波动升高 | V2 |
 | `> 300 bps` | 高波动 | IDLE |
 
